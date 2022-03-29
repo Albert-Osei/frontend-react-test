@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
 import './App.css';
+import Api from "./api";
 
 function App() {
+  const getPatientMood = async () => {
+    const response = await Api.get('/todayMood');
+    return response;
+  }
+
+  useEffect(() => {
+    const fetchPatientMood = async () => {
+      const res = getPatientMood()
+      console.log(res)
+    }
+    fetchPatientMood()
+  }, [])
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* Will render patient mood json data here */}
     </div>
   );
 }
